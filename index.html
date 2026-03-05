@@ -1,8 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Fakrul</title>
+<title>Fakrul Sad Bio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -23,21 +24,10 @@ height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-background:#050510;
+background:linear-gradient(135deg,#050510,#0f0c29,#302b63);
 overflow:hidden;
 color:white;
 }
-
-/* background galaxy */
-
-#particles-js{
-position:fixed;
-width:100%;
-height:100%;
-z-index:-2;
-}
-
-/* rain */
 
 canvas{
 position:fixed;
@@ -46,21 +36,19 @@ left:0;
 z-index:-1;
 }
 
-/* profile card */
-
 .card{
 width:360px;
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(15px);
 border-radius:20px;
-box-shadow:0 0 40px rgba(140,100,255,0.4);
+box-shadow:0 0 40px rgba(140,100,255,0.5);
 overflow:hidden;
-animation:fade 1.5s ease;
+animation:fade 1.2s ease;
 }
 
 @keyframes fade{
 from{opacity:0; transform:translateY(40px)}
-to{opacity:1;}
+to{opacity:1}
 }
 
 .header{
@@ -87,8 +75,6 @@ font-size:13px;
 opacity:0.7;
 }
 
-/* sections */
-
 .section{
 display:none;
 padding:20px;
@@ -100,16 +86,12 @@ display:block;
 animation:fade 0.7s;
 }
 
-/* typing text */
-
 .typing{
 font-style:italic;
 font-size:14px;
-opacity:0.9;
 min-height:40px;
+opacity:0.9;
 }
-
-/* social */
 
 .social{
 margin-top:15px;
@@ -124,10 +106,8 @@ transition:0.3s;
 
 .social a:hover{
 color:#a78bfa;
-transform:scale(1.2);
+transform:scale(1.3);
 }
-
-/* buttons */
 
 .buttons{
 display:flex;
@@ -148,15 +128,11 @@ transition:0.3s;
 background:rgba(255,255,255,0.1);
 }
 
-/* timeline */
-
 .timeline{
 text-align:left;
 font-size:13px;
 line-height:1.7;
 }
-
-/* contact */
 
 .contact a{
 display:block;
@@ -173,6 +149,16 @@ transition:0.3s;
 background:#7c5cff;
 }
 
+.music{
+text-align:center;
+padding:10px;
+}
+
+.music audio{
+width:90%;
+filter:drop-shadow(0 0 10px #8a7dff);
+}
+
 footer{
 text-align:center;
 font-size:12px;
@@ -183,9 +169,7 @@ opacity:0.6;
 </style>
 </head>
 
-<body onclick="playMusic()">
-
-<div id="particles-js"></div>
+<body onclick="startMusic()">
 
 <canvas id="rain"></canvas>
 
@@ -198,7 +182,6 @@ opacity:0.6;
 </div>
 
 <div id="home" class="section active">
-
 <div class="typing" id="typing"></div>
 
 <div class="social">
@@ -206,31 +189,25 @@ opacity:0.6;
 <a href="https://instagram.com/rulshz"><i class="fab fa-instagram"></i></a>
 <a href="https://youtube.com/@rulshz"><i class="fab fa-youtube"></i></a>
 </div>
-
 </div>
 
 <div id="progress" class="section">
 
 <div class="timeline">
-
 <div>2022 — hidup ceria tanpa masalah</div>
 <div>2023 — pisah dengan kawan lama</div>
 <div>2023 — masuk sekolah baru</div>
 <div>2024 — hidup mula berubah</div>
-<div>2024 — rasa hilang arah hidup</div>
 <div>2024 — kehilangan orang tersayang</div>
 <div>2025 — masih mencari diri sendiri</div>
-
 </div>
 
 </div>
 
 <div id="contact" class="section contact">
-
 <a href="https://wa.me/601172590364">WhatsApp</a>
 <a href="https://t.me/rulshz">Telegram</a>
 <a href="https://github.com/fahrihostingg">Github</a>
-
 </div>
 
 <div class="buttons">
@@ -239,17 +216,17 @@ opacity:0.6;
 <button onclick="show('contact')">CONTACT</button>
 </div>
 
+<div class="music">
+<audio id="music" controls loop>
+<source src="rul.mp3" type="audio/mpeg">
+</audio>
+</div>
+
 <footer>
 © FakrulDev 2024
 </footer>
 
 </div>
-
-<audio id="music" loop>
-<source src="https://storage.neko.pe/file/Pd8lNw~74AgVto~G9FWo.mp3">
-</audio>
-
-<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <script>
 
@@ -262,64 +239,52 @@ sec.classList.remove('active')
 document.getElementById(id).classList.add('active')
 }
 
-/* music */
+/* music start */
 
-function playMusic(){
+function startMusic(){
 document.getElementById("music").play()
 }
 
 /* typing sad text */
 
-const texts=[
+const text=[
 "tetap tersenyum walaupun hati hancur...",
+"aku nampak kuat tapi sebenarnya tidak...",
 "kadang kita penat bukan sebab kerja...",
-"tapi sebab perasaan yang terlalu berat...",
-"aku nampak kuat, tapi sebenarnya tidak...",
+"tapi sebab perasaan terlalu berat...",
 "sunyi itu sakit..."
 ]
 
 let i=0
 let j=0
 let current=""
-let isDeleting=false
+let deleteText=false
 
-function type(){
+function typing(){
 
-current=texts[i]
+current=text[i]
 
-if(!isDeleting){
+if(!deleteText){
 document.getElementById("typing").textContent=current.substring(0,j++)
 if(j>current.length){
-isDeleting=true
-setTimeout(type,2000)
+deleteText=true
+setTimeout(typing,2000)
 return
 }
 }else{
 document.getElementById("typing").textContent=current.substring(0,j--)
 if(j==0){
-isDeleting=false
+deleteText=false
 i++
-if(i==texts.length)i=0
+if(i>=text.length)i=0
 }
 }
 
-setTimeout(type,isDeleting?40:70)
+setTimeout(typing,deleteText?40:70)
 
 }
 
-type()
-
-/* particles */
-
-particlesJS("particles-js",{
-particles:{
-number:{value:80},
-size:{value:3},
-move:{speed:1},
-line_linked:{enable:true},
-color:{value:"#ffffff"}
-}
-})
+typing()
 
 /* rain effect */
 
@@ -330,6 +295,7 @@ canvas.width=window.innerWidth
 canvas.height=window.innerHeight
 
 var rain=[]
+
 for(let i=0;i<200;i++){
 rain.push({
 x:Math.random()*canvas.width,
@@ -340,13 +306,12 @@ ys:Math.random()*10+10
 })
 }
 
-function drawRain(){
+function draw(){
 
 ctx.clearRect(0,0,canvas.width,canvas.height)
 
 ctx.strokeStyle="rgba(174,194,224,0.5)"
 ctx.lineWidth=1
-ctx.lineCap="round"
 
 for(let i=0;i<rain.length;i++){
 
@@ -356,18 +321,6 @@ ctx.beginPath()
 ctx.moveTo(r.x,r.y)
 ctx.lineTo(r.x+r.l*r.xs,r.y+r.l*r.ys)
 ctx.stroke()
-
-}
-
-moveRain()
-
-}
-
-function moveRain(){
-
-for(let i=0;i<rain.length;i++){
-
-let r=rain[i]
 
 r.x+=r.xs
 r.y+=r.ys
@@ -381,9 +334,10 @@ r.y=-20
 
 }
 
-setInterval(drawRain,30)
+setInterval(draw,30)
 
 </script>
 
 </body>
 </html>
+```
