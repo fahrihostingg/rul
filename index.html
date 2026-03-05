@@ -1,588 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <body onclick="exec()">
-    <!-- partial:index.partial.html -->
-    <meta charset="UTF-8">
-    <title>Fakrul</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-      @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
+<head>
+<meta charset="UTF-8">
+<title>Fakrul</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      * {
-        box-sizing: border-box;
-      }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-      body {
-        color: #2b2c48;
-        font-family: "Jost", sans-serif;
-        background-image: url("https://api.betabotz.eu.org/api/tools/get-upload?id=f/wgep4ag1.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        min-height: 100vh;
-        display: flex;
-        flex-wrap: wrap;
-        padding: 20px;
-      }
+<style>
 
-      .card {
-        max-width: 340px;
-        margin: auto;
-        overflow-y: auto;
-        position: relative;
-        z-index: 1;
-        overflow-x: hidden;
-        background-color: white;
-        display: flex;
-        transition: 0.3s;
-        flex-direction: column;
-        border-radius: 10px;
-        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2);
-      }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-      .card[data-state="#about"] {
-        height: 450px;
-      }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-      .card[data-state="#about"] .card-main {
-        padding-top: 0;
-      }
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#050510;
+overflow:hidden;
+color:white;
+}
 
-      .card[data-state="#contact"] {
-        height: 430px;
-      }
+/* background galaxy */
 
-      .card[data-state="#experience"] {
-        height: 550px;
-      }
+#particles-js{
+position:fixed;
+width:100%;
+height:100%;
+z-index:-2;
+}
 
-      .card.is-active .card-header {
-        height: 80px;
-      }
+/* rain */
 
-      .card.is-active .card-cover {
-        height: 100px;
-        top: -50px;
-      }
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
 
-      .card.is-active .card-avatar {
-        transform: none;
-        left: 20px;
-        width: 50px;
-        height: 50px;
-        bottom: 10px;
-      }
+/* profile card */
 
-      .card.is-active .card-fullname,
-      .card.is-active .card-jobtitle {
-        left: 86px;
-        transform: none;
-      }
+.card{
+width:360px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+border-radius:20px;
+box-shadow:0 0 40px rgba(140,100,255,0.4);
+overflow:hidden;
+animation:fade 1.5s ease;
+}
 
-      .card.is-active .card-fullname {
-        bottom: 18px;
-        font-size: 19px;
-      }
+@keyframes fade{
+from{opacity:0; transform:translateY(40px)}
+to{opacity:1;}
+}
 
-      .card.is-active .card-jobtitle {
-        bottom: 16px;
-        letter-spacing: 1px;
-        font-size: 10px;
-      }
+.header{
+text-align:center;
+padding:30px 20px;
+}
 
-      .card-header {
-        position: relative;
-        display: flex;
-        height: 200px;
-        flex-shrink: 0;
-        width: 100%;
-        transition: 0.3s;
-      }
+.avatar{
+width:110px;
+height:110px;
+border-radius:50%;
+border:3px solid #9d7bff;
+box-shadow:0 0 25px #8a7dff;
+margin-bottom:10px;
+}
 
-      .card-header * {
-        transition: 0.3s;
-      }
+.name{
+font-size:22px;
+font-weight:700;
+}
 
-      .card-cover {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        height: 160px;
-        top: -20%;
-        left: 0;
-        will-change: top;
-        background-size: cover;
-        background-position: center;
-        filter: blur(30px);
-        transform: scale(1.2);
-        transition: 0.5s;
-      }
+.title{
+font-size:13px;
+opacity:0.7;
+}
 
-      .card-avatar {
-        width: 100px;
-        height: 100px;
-        box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 50%;
-        -o-object-position: center;
-        object-position: center;
-        -o-object-fit: cover;
-        object-fit: cover;
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%) translateY(-64px);
-      }
+/* sections */
 
-      .card-fullname {
-        position: absolute;
-        bottom: 0;
-        font-size: 22px;
-        font-weight: 700;
-        text-align: center;
-        white-space: nowrap;
-        transform: translateY(-10px) translateX(-50%);
-        left: 50%;
-      }
+.section{
+display:none;
+padding:20px;
+text-align:center;
+}
 
-      .card-jobtitle {
-        position: absolute;
-        bottom: 0;
-        font-size: 11px;
-        white-space: nowrap;
-        font-weight: 500;
-        opacity: 0.7;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin: 0;
-        left: 50%;
-        transform: translateX(-50%) translateY(-7px);
-      }
+.section.active{
+display:block;
+animation:fade 0.7s;
+}
 
-      .card-main {
-        position: relative;
-        flex: 1;
-        display: flex;
-        padding-top: 10px;
-        flex-direction: column;
-      }
+/* typing text */
 
-      .card-subtitle {
-        font-weight: 50;
-        font-size: 12px;
-        margin-bottom: 8px;
-      }
+.typing{
+font-style:italic;
+font-size:14px;
+opacity:0.9;
+min-height:40px;
+}
 
-      .card-content {
-        padding: 20px;
-      }
+/* social */
 
-      .card-desc {
-        line-height: 1.6;
-        color: #636b6f;
-        font-size: 14px;
-        margin: 0;
-        font-weight: 400;
-        font-family: "DM Sans", sans-serif;
-      }
+.social{
+margin-top:15px;
+}
 
-      .card-social {
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-        margin-bottom: 30px;
-      }
+.social a{
+color:white;
+margin:0 12px;
+font-size:20px;
+transition:0.3s;
+}
 
-      .card-social svg {
-        fill: #a5b5ce;
-        width: 16px;
-        display: block;
-        transition: 0.3s;
-      }
+.social a:hover{
+color:#a78bfa;
+transform:scale(1.2);
+}
 
-      .card-social a {
-        color: #8797a1;
-        height: 32px;
-        width: 32px;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: 0.3s;
-        background-color: rgba(93, 133, 193, 0.05);
-        border-radius: 50%;
-        margin-right: 10px;
-      }
+/* buttons */
 
-      .card-social a:hover svg {
-        fill: #637faa;
-      }
+.buttons{
+display:flex;
+border-top:1px solid rgba(255,255,255,0.1);
+}
 
-      .card-social a:last-child {
-        margin-right: 0;
-      }
+.buttons button{
+flex:1;
+padding:15px;
+border:none;
+background:none;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
 
-      .card-buttons {
-        display: flex;
-        background-color: #fff;
-        margin-top: auto;
-        position: -webkit-sticky;
-        position: sticky;
-        bottom: 0;
-        left: 0;
-      }
+.buttons button:hover{
+background:rgba(255,255,255,0.1);
+}
 
-      .card-buttons button {
-        flex: 1 1 auto;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        background: 0;
-        font-size: 13px;
-        border: 0;
-        padding: 15px 5px;
-        cursor: pointer;
-        color: #5c5c6d;
-        transition: 0.3s;
-        font-family: "Jost", sans-serif;
-        font-weight: 500;
-        outline: 0;
-        border-bottom: 3px solid transparent;
-      }
+/* timeline */
 
-      .card-buttons button.is-active,
-      .card-buttons button:hover {
-        color: #2b2c48;
-        border-bottom: 3px solid #8a84ff;
-        background: linear-gradient(to bottom, rgba(127, 199, 231, 0) 0%, rgba(207, 204, 255, 0.2) 44%, rgba(211, 226, 255, 0.4) 100%);
-      }
+.timeline{
+text-align:left;
+font-size:13px;
+line-height:1.7;
+}
 
-      .card-section {
-        display: none;
-      }
+/* contact */
 
-      .card-section.is-active {
-        display: block;
-        -webkit-animation: fadeIn 0.6s both;
-        animation: fadeIn 0.6s both;
-      }
+.contact a{
+display:block;
+margin:10px 0;
+padding:10px;
+border-radius:10px;
+background:rgba(255,255,255,0.1);
+text-decoration:none;
+color:white;
+transition:0.3s;
+}
 
-      @-webkit-keyframes fadeIn {
-        0% {
-          opacity: 0;
-          transform: translatey(40px);
-        }
+.contact a:hover{
+background:#7c5cff;
+}
 
-        100% {
-          opacity: 1;
-        }
-      }
+footer{
+text-align:center;
+font-size:12px;
+padding:10px;
+opacity:0.6;
+}
 
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-          transform: translatey(40px);
-        }
+</style>
+</head>
 
-        100% {
-          opacity: 1;
-        }
-      }
+<body onclick="playMusic()">
 
-      .card-timeline {
-        margin-top: 30px;
-        position: relative;
-      }
+<div id="particles-js"></div>
 
-      .card-timeline:after {
-        background: linear-gradient(to top, rgba(134, 214, 243, 0) 0%, #516acc 100%);
-        content: "";
-        left: 42px;
-        width: 2px;
-        top: 0;
-        height: 100%;
-        position: absolute;
-        content: "";
-      }
+<canvas id="rain"></canvas>
 
-      .card-item {
-        position: relative;
-        padding-left: 60px;
-        padding-right: 20px;
-        padding-bottom: 30px;
-        z-index: 1;
-      }
+<div class="card">
 
-      .card-item:last-child {
-        padding-bottom: 5px;
-      }
+<div class="header">
+<img class="avatar" src="https://api.betabotz.eu.org/api/tools/get-upload?id=f/wgep4ag1.jpg">
+<div class="name">Fakrul</div>
+<div class="title">Beban Hidup</div>
+</div>
 
-      .card-item:after {
-        content: attr(data-year);
-        width: 10px;
-        position: absolute;
-        top: 0;
-        left: 37px;
-        width: 8px;
-        height: 8px;
-        line-height: 0.6;
-        border: 2px solid #fff;
-        font-size: 11px;
-        text-indent: -35px;
-        border-radius: 50%;
-        color: rgba(134, 134, 134, 0.7);
-        background: linear-gradient(to bottom, #a0aee3 0%, #516acc 100%);
-      }
+<div id="home" class="section active">
 
-      .card-item-title {
-        font-weight: 500;
-        font-size: 14px;
-        margin-bottom: 5px;
-      }
+<div class="typing" id="typing"></div>
 
-      .card-item-desc {
-        font-size: 13px;
-        color: #6f6f7b;
-        line-height: 1.5;
-        font-family: "DM Sans", sans-serif;
-      }
+<div class="social">
+<a href="https://wa.me/601172590364"><i class="fab fa-whatsapp"></i></a>
+<a href="https://instagram.com/rulshz"><i class="fab fa-instagram"></i></a>
+<a href="https://youtube.com/@rulshz"><i class="fab fa-youtube"></i></a>
+</div>
 
-      .card-contact-wrapper {
-        margin-top: 20px;
-      }
+</div>
 
-      .card-contact {
-        display: flex;
-        align-items: center;
-        font-size: 13px;
-        color: #6f6f7b;
-        font-family: "DM Sans", sans-serif;
-        line-height: 1.6;
-        cursor: pointer;
-      }
+<div id="progress" class="section">
 
-      .card-contact+.card-contact {
-        margin-top: 16px;
-      }
+<div class="timeline">
 
-      .card-contact svg {
-        flex-shrink: 0;
-        width: 30px;
-        min-height: 34px;
-        margin-right: 12px;
-        transition: 0.3s;
-        padding-right: 12px;
-        border-right: 1px solid #dfe2ec;
-      }
+<div>2022 — hidup ceria tanpa masalah</div>
+<div>2023 — pisah dengan kawan lama</div>
+<div>2023 — masuk sekolah baru</div>
+<div>2024 — hidup mula berubah</div>
+<div>2024 — rasa hilang arah hidup</div>
+<div>2024 — kehilangan orang tersayang</div>
+<div>2025 — masih mencari diri sendiri</div>
 
-      .contact-me {
-        border: 0;
-        outline: none;
-        background: linear-gradient(to right, rgba(83, 200, 239, 0.8) 0%, rgba(81, 106, 204, 0.8) 96%);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-        color: #fff;
-        padding: 12px 16px;
-        width: 100%;
-        border-radius: 5px;
-        margin-top: 25px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 500;
-        font-family: "Jost", sans-serif;
-        transition: 0.3s;
-      }
+</div>
 
-      .svg-icon {
-        width: 1em;
-        height: 1em;
-      }
+</div>
 
-      .svg-icon path,
-      .svg-icon polygon,
-      .svg-icon rect {
-        fill: #4691f6;
-      }
+<div id="contact" class="section contact">
 
-      .svg-icon circle {
-        stroke: #4691f6;
-        stroke-width: 1;
-      }
+<a href="https://wa.me/601172590364">WhatsApp</a>
+<a href="https://t.me/rulshz">Telegram</a>
+<a href="https://github.com/fahrihostingg">Github</a>
 
-      .footer {
-        width: 100%;
-        height: 50px;
-        padding-left: 10px;
-        line-height: 50px;
-        color: #fff;
-      }
-    </style>
-    </head>
-    <audio autoplay>
-      <source src="https://storage.neko.pe/file/Pd8lNw~74AgVto~G9FWo.mp3" type="audio/mp3">
-    </audio>
-    <body>
-      <!-- partial:index.partial.html -->
-      <div class="card" data-state="#about">
-        <div class="card-header">
-          <div class="card-cover" style="background-image: url('https://api.betabotz.eu.org/api/tools/get-upload?id=f/wgep4ag1.jpg')"></div>
-          <img class="card-avatar" src="https://api.betabotz.eu.org/api/tools/get-upload?id=f/wgep4ag1.jpg" alt="avatar" />
-          <h1 class="card-fullname">Fakrul</h1>
-          <h2 class="card-jobtitle">Beban Hidup</h2>
-        </div>
-        <div class="card-main">
-          <div class="card-section is-active" id="about">
-            <div class="card-content">
-              <div class="card-subtitle">@rulshz</div>
-              <p class="card-text">Tetaplah tersenyum walaupun terluka.</p></p>
-              <p class="card-item-desc"> - tired</p>
-            </div>
-            <div class="card-social">
-              <a href="https://wa.me/601172590364">
-                <i class="fab fa-whatsapp"></i>
-              </a>
-              <a href="https://www.instagram.com/@rulshz">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="https://youtube.com/@rulshz">
-                <i class="fab fa-youtube"></i>
-                </a>
-            </div>
-          </div>
-          <div class="card-section" id="experience">
-            <div class="card-content">
-              <div class="card-subtitle">Hidupku :')</div>
-              <div class="card-timeline">
-                <div class="card-item" data-year="2022">
-                  <div class="card-item-title"> ceria je aktif semua </span>
-                  </div>
-                  <div class="card-item-desc">tk stress/tkde masalah</div>
-                </div>
-                <div class="card-item" data-year="2023">
-                  <div class="card-item-title"> pisah ngn kawan²</span>
-                  </div>
-                  <div class="card-item-desc">time tu sumpah sedih+sakit</div>
-                  <div class="card-item-desc">2023 - time pisah</div>
-                </div>
-                <div class="card-item" data-year="2023">
-                  <div class="card-item-title">msuk smk,jumpe kawan bru </span>
-                  </div>
-                  <div class="card-item-desc">sedih sume kurang la</div>
-                  <div class="card-item-desc">2023 - first msuk smk</div>
-                </div>
-                <div class="card-item" data-year="2024">
-                  <div class="card-item-title">alhamdulillah mkin baik</div>
-                  <div class="card-item-desc">semangat dh tk sedih²</div>
-                  <div class="card-item-desc">2024 - bulan 5</div>
-                </div>
-                <div class="card-item" data-year="2024">
-                  <div class="card-item-title"> </span>
-                  </div>
-                  <div class="card-item-desc">cm org gile</div>
-                </div>
-                <div class="card-item" data-year="2024">
-                  <div class="card-item-title">tkde arah hidup</span>
-                  </div>
-                  <div class="card-item-desc">jrg senyum,pura² bahagia,rse nk mti,tkde arah tuju,nk ajal awal..sume dh berubah:(</div>
-<div class="card-item-desc">2024 - bulan 9</div>
-                </div>
-                <div class="card-item" data-year="2024">
-                  <div class="card-item-title">sedih kamel tingglkn kite</span>
-                  </div>
-                  <div class="card-item-desc">rse tk prcya,rse sunyi,nngis:(</div>
-<div class="card-item-desc">2024 - 30/11</div>
-                </div>
-                <div class="card-item" data-year="2024">
-                  <div class="card-item-title">sedih pakcu tingglkn apit</span>
-                  </div>
-                  <div class="card-item-desc">time tu sumph tk prcya,nngis tk henti:(</div>
-<div class="card-item-desc">2024 - 20/12</div>
-                </div>
-                <div class="card-item" data-year="2025">
-                  <div class="card-item-title">sunyi..</span>
-                  </div>rse hlg diri sendiri sedih sngt"</div>
-<div class="card-item-desc">2025 - sekrg</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-section" id="contact">
-            <div class="card-content">
-              <div class="card-subtitle">CONTACT</div>
-              <div class="card-contact-wrapper">
-                <div class="card-contact">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg> N9, Seremban, Malaysia
-                </div>
-                <div class="card-contact" href="mailto: fakrulafifshazlybinalkhusaimi@gmail.com">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                    <path d="M22 6l-10 7L2 6" />
-                  </svg> fakrulafifshazlybinalkhusaimi@gmail.com
-                </div>
-                <div class="card-contact" href="mailto: fakrulafifshazlybinalkhusaimi@gmail.com">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                    <path d="M22 6l-10 7L2 6" />
-                  </svg> support@fakrul.com
-                </div>
-                <a href="https://github.com/fahrihostingg">
-                  <button class="contact-me">Github</button>
-                </a>
-                <a href="https://wa.me/601172590364">
-                 <button class="contact-me">WhatsApp</button>
-                </a>
-                <a href="https://t.me/rulshz">
-                 <button class="contact-me">Telegram</button>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card-buttons">
-            <button data-section="#about" class="is-active">HOME</button>
-            <button data-section="#experience">PROGRESS</button>
-            <button data-section="#contact">CONTACT</button>
-          </div>
-        </div>
-      </div>
-      <!-- partial -->
-      <audio id="audio" style="display:none">
-        <source src="rul.mp3" type="audio/mpeg">
-      </audio>
-      <script>
-        const buttons = document.querySelectorAll(".card-buttons button");
-        const sections = document.querySelectorAll(".card-section");
-        const card = document.querySelector(".card");
-        const handleButtonClick = e => {
-          const targetSection = e.target.getAttribute("data-section");
-          const section = document.querySelector(targetSection);
-          targetSection !== "#about" ? card.classList.add("is-active") : card.classList.remove("is-active");
-          card.setAttribute("data-state", targetSection);
-          sections.forEach(s => s.classList.remove("is-active"));
-          buttons.forEach(b => b.classList.remove("is-active"));
-          e.target.classList.add("is-active");
-          section.classList.add("is-active");
-        };
-        buttons.forEach(btn => {
-          btn.addEventListener("click", handleButtonClick);
-        });
-      </script>
-      <script src="https://cdn.jsdelivr.net/gh/scottschiller/Snowstorm/snowstorm.js" type="text/javascript"></script>
-      <script src="https://cdn.rawgit.com/bungfrangki/efeksalju/2a7805c7/efek-salju.js" type="text/javascript"></script>
-      <div class="footer">
-        <p style="text-align: center;color: white;"> © Since 2024 | FakrulDev. </p>
-      </div>
-    </body>
-    <script src="/index.html"></script>
-    <script>
-      function exec() {
-        document.getElementById('audio').play();
-        openFullscreen()
-      }
-    </script>
+</div>
+
+<div class="buttons">
+<button onclick="show('home')">HOME</button>
+<button onclick="show('progress')">PROGRESS</button>
+<button onclick="show('contact')">CONTACT</button>
+</div>
+
+<footer>
+© FakrulDev 2024
+</footer>
+
+</div>
+
+<audio id="music" loop>
+<source src="https://storage.neko.pe/file/Pd8lNw~74AgVto~G9FWo.mp3">
+</audio>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<script>
+
+/* switch tab */
+
+function show(id){
+document.querySelectorAll('.section').forEach(sec=>{
+sec.classList.remove('active')
+})
+document.getElementById(id).classList.add('active')
+}
+
+/* music */
+
+function playMusic(){
+document.getElementById("music").play()
+}
+
+/* typing sad text */
+
+const texts=[
+"tetap tersenyum walaupun hati hancur...",
+"kadang kita penat bukan sebab kerja...",
+"tapi sebab perasaan yang terlalu berat...",
+"aku nampak kuat, tapi sebenarnya tidak...",
+"sunyi itu sakit..."
+]
+
+let i=0
+let j=0
+let current=""
+let isDeleting=false
+
+function type(){
+
+current=texts[i]
+
+if(!isDeleting){
+document.getElementById("typing").textContent=current.substring(0,j++)
+if(j>current.length){
+isDeleting=true
+setTimeout(type,2000)
+return
+}
+}else{
+document.getElementById("typing").textContent=current.substring(0,j--)
+if(j==0){
+isDeleting=false
+i++
+if(i==texts.length)i=0
+}
+}
+
+setTimeout(type,isDeleting?40:70)
+
+}
+
+type()
+
+/* particles */
+
+particlesJS("particles-js",{
+particles:{
+number:{value:80},
+size:{value:3},
+move:{speed:1},
+line_linked:{enable:true},
+color:{value:"#ffffff"}
+}
+})
+
+/* rain effect */
+
+var canvas=document.getElementById("rain")
+var ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+var rain=[]
+for(let i=0;i<200;i++){
+rain.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+l:Math.random()*1,
+xs:-4+Math.random()*4+2,
+ys:Math.random()*10+10
+})
+}
+
+function drawRain(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+ctx.strokeStyle="rgba(174,194,224,0.5)"
+ctx.lineWidth=1
+ctx.lineCap="round"
+
+for(let i=0;i<rain.length;i++){
+
+let r=rain[i]
+
+ctx.beginPath()
+ctx.moveTo(r.x,r.y)
+ctx.lineTo(r.x+r.l*r.xs,r.y+r.l*r.ys)
+ctx.stroke()
+
+}
+
+moveRain()
+
+}
+
+function moveRain(){
+
+for(let i=0;i<rain.length;i++){
+
+let r=rain[i]
+
+r.x+=r.xs
+r.y+=r.ys
+
+if(r.x>canvas.width||r.y>canvas.height){
+r.x=Math.random()*canvas.width
+r.y=-20
+}
+
+}
+
+}
+
+setInterval(drawRain,30)
+
+</script>
+
+</body>
 </html>
